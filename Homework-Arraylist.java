@@ -7,10 +7,11 @@ public class Arraylist {
             String sCurrentLine;
             while ((sCurrentLine = br.readLine()) != null) {
                 arr.add(sCurrentLine);
-
+                   count++;
             }
             ArrayList<Integer> newList = removeDuplicates(arr);
             System.out.println(newList);
+            System.out.println(count);
         } catch (IOException e) {
             e.printStackTrace();
         }
