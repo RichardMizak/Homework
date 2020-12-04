@@ -49,6 +49,19 @@ public class Main {
         ArrayList<String> str = arr3;
         bw.write(String.valueOf(str));
         bw.close();
+             /*int temp;
+        for (int i = 0; i < arr.-1; i++)
+        {
+            for(int j = 0; j < numbers.length-i-1; j++)
+            {
+                if(arr3.get(j) > arr3.get(j + 1))
+                {
+                    temp = numbers [j + 1];
+                    numbers [j + 1]= numbers [j];
+                    numbers [j] = temp;
+                }
+            }
+        }*/
 
 }
 }
