@@ -173,8 +173,36 @@ return cityList;
             e.printStackTrace();
         }
         return null;
+    }   public int cityExist(String code3, String cityname ){
+        if (code3==null || cityname==null || code3.equals("") || cityname.equals("")){
+return -1;
+        }else {
+            String query="SELECT id FROM city WHERE CountryCode LIKE ? AND name LIKE ? ";
+            Connection conn=null;
+            try {
+                conn=getConnection();
+                PreparedStatement ps= conn.prepareStatement(query);
+                ps.setString(1, code3);
+                ps.setString(2, cityname);
+                ResultSet rs=ps.executeQuery();
+                System.out.println(ps);
+                if (rs.next()){
+                    int id=rs.getInt("id");
+                    conn.close();
+                    return  id;
+                }else {
+                    conn.close();
+                    return -1;
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
     }
-     public List<Monument>  getMonuments(){
+    public List<Monument>  getMonuments(){
         String query="";
         List<Monument> monumentList=new ArrayList<>();
         try {
@@ -198,5 +226,30 @@ return cityList;
             e.printStackTrace();
         }
         return null;
+    }
+    public boolean insertNewMonument( String code3, String city, String name ){
+        if (name==null || name.equals("")){
+            return false;
+        }else{
+            int cityID=cityExist(code3, city);
+            if(cityID==-1){
+                return false;
+            }else {
+                String query="INSERT INTO monument(name, city) VALUES (?, ?)";
+                try {
+                    Connection conn=getConnection();
+                    PreparedStatement ps= conn.prepareStatement(query);
+                    ps.setString(1, name);
+                    ps.setInt(2, cityID);
+                    ps.executeUpdate();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        return true;
     }
 }
