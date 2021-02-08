@@ -174,4 +174,29 @@ return cityList;
         }
         return null;
     }
+     public List<Monument>  getMonuments(){
+        String query="";
+        List<Monument> monumentList=new ArrayList<>();
+        try {
+            Connection conn=getConnection();
+            if (conn!=null){
+                System.out.println("Success");
+                PreparedStatement ps= conn.prepareStatement(query);
+                System.out.println(ps);
+             //   ps.setString(1, );
+                ResultSet rs=ps.executeQuery();
+                while(rs.next()){
+                    String country=rs.getString("Country");
+                    String name= rs.getString("Name");
+                    String monument=rs.getString("Monument");
+                    int monumentID=rs.getInt("MonumentId");
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
